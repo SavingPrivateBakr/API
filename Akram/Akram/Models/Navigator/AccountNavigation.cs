@@ -9,35 +9,32 @@ namespace Akram.Models.Navigator
 {
     public class AccountNavigation : IAccountNavigation
     {
-        Db L;
+        Dbase L;
 
-        public AccountNavigation(Db l  )
+        public AccountNavigation(Dbase l  )
         {
             L = l;
         }
-        public Account? CheckAccount(Guid id)
+        public bool CheckAccount(Guid id)
         {
             Account? w = L.Accounts.FirstOrDefault(w => w.ID == id);
             if (w == null)
             {
-                return  null;
+                return  false;
             }
-            return w ;
+            return true;
         }
         public List<Account> GetAll()
         {
 
-
            List<Account> accounts = L.Accounts.ToList();
-
             return accounts;
-
         }
         public Account? GetAccount(Guid id)
         {
 
-
-           if (CheckAccount(id) == null)
+ 
+           if (CheckAccount(id) == false)
             {
                 return null;
             }

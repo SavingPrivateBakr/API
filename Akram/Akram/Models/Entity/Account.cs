@@ -9,10 +9,7 @@ namespace Akram.Models.Entity
 
         public string Number { get; set; }
 
-
-
         public string Note { get; set; }
-
         public bool CanEdit { get; set; }
 
 

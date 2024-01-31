@@ -1,6 +1,10 @@
 
+using Akram.Models.DBc;
 using Akram.Models.Navigator;
+using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+
+using System.Runtime.CompilerServices;
 
 namespace Akram
 {
@@ -13,11 +17,17 @@ namespace Akram
             // Add services to the container.
 
             builder.Services.AddControllers();
+            string? connectionStrings = builder.Configuration.GetConnectionString("db");
+   
+        
+           
+            builder.Services.AddDbContext<Dbase>(w => w.UseSqlServer(connectionStrings));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IAccountNavigation,AccountNavigation>();
-            builder.Services.AddDbContext<Models.DBc.Db>(w => w.UseSqlServer("Data Source=LAPTOP-HD9LIS85;Initial Catalog=Akram;Integrated Security=True;Encrypt=False;Trust Server Certificate=True"));
+            builder.Services.AddAutoMapper(typeof(Program));
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

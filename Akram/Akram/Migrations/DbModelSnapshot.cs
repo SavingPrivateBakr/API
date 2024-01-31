@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Akram.Migrations
 {
-    [DbContext(typeof(Db))]
+    [DbContext(typeof(Dbase))]
     partial class DbModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

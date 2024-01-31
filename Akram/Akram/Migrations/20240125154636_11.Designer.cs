@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Akram.Migrations
 {
-    [DbContext(typeof(Db))]
+    [DbContext(typeof(Dbase))]
     [Migration("20240125154636_11")]
     partial class _11
     {

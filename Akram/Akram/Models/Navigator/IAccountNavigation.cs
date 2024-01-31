@@ -6,7 +6,7 @@ namespace Akram.Models.Navigator
     public interface IAccountNavigation
     {
 
-        public Account? CheckAccount(Guid id);
+        public bool CheckAccount(Guid id);
 
         public List<Account> GetAll();
 
