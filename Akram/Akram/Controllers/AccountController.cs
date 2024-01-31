@@ -21,13 +21,13 @@ namespace Akram.Controllers
         private readonly Dbase L;
         private readonly IAccountNavigation AccN;
         private readonly IMapper Maper;
-        private readonly IConfiguration config;
-        public AccountController(Dbase l, IAccountNavigation AccN, IMapper Maper,IConfiguration config)
+      
+        public AccountController(Dbase l, IAccountNavigation AccN, IMapper Maper)
         {
             L = l;
             this.AccN = AccN;
             this.Maper = Maper;
-            this.config=config;
+           
         }
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -39,13 +39,32 @@ namespace Akram.Controllers
         }
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
-       [HttpGet("{id}")]
+       [HttpGet("router/{id}")]
         public IActionResult GetAccountByID([FromRoute]Guid id)
         {
             
             return (AccN.GetAccount(id)==null?NotFound():Ok(AccN.GetAccount(id)));
             
         }
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+       [ProducesResponseType(StatusCodes.Status200OK)]
+       
+        
+        public IActionResult GetAccountDetails([FromRoute]Guid id)
+       {
+
+           Account? old = AccN.GetAccount(id);
+
+
+           if (old == null)
+               return NotFound();
+
+                  AccountDTO SaveChanger= Maper.Map<AccountDTO>(old);
+
+                   return Ok(SaveChanger);
+
+       }
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -62,23 +81,7 @@ namespace Akram.Controllers
             return BadRequest();
         }
 
-        [HttpPut("{id:Guid}")]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetAccountDetails([FromRoute]Guid id)
-        {
-
-            Account? old = AccN.GetAccount(id);
-
-
-            if (old == null)
-                return NotFound();
-
-                   AccountDTO SaveChanger= Maper.Map<AccountDTO>(old);
-                    L.SaveChanges();
-                    return Ok(SaveChanger);
-
-        }
+     
         [HttpPut("{id:Guid}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -17,14 +17,15 @@ namespace Akram
             // Add services to the container.
 
             builder.Services.AddControllers();
-            string? connectionStrings = builder.Configuration.GetConnectionString("db");
-   
-        
-           
-            builder.Services.AddDbContext<Dbase>(w => w.UseSqlServer(connectionStrings));
+          
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            string? connectionStrings = builder.Configuration.GetConnectionString("db");
+
+
+
+            builder.Services.AddDbContext<Dbase>(w => w.UseSqlServer(connectionStrings));
             builder.Services.AddScoped<IAccountNavigation,AccountNavigation>();
             builder.Services.AddAutoMapper(typeof(Program));
             

@@ -15,7 +15,7 @@ namespace Akram.Models.DBc
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=LAPTOP-HD9LIS85;Initial Catalog=Akram;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
+          //  optionsBuilder.UseSqlServer("Data Source=LAPTOP-HD9LIS85;Initial Catalog=Akram;Integrated Security=True;Encrypt=False;Trust Server Certificate=True");
 
         }
 
